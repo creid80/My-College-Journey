@@ -13,10 +13,28 @@
         android:theme="@style/Theme.C196CarolReid"
         tools:targetApi="31">
         <activity
-            android:name=".UI.ProductList"
-            android:label="Product List"
-            android:parentActivityName=".UI.MainActivity"
+            android:name=".UI.PartDetails"
+            android:label="Part Details"
+            android:parentActivityName=".UI.ProductDetails"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.ProductDetails"
+            android:exported="false"
+            android:label="Product Details and Parts List"
+            android:parentActivityName=".UI.ProductList">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.ProductList"
+            android:exported="false"
+            android:label="Product List"
+            android:parentActivityName=".UI.MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
