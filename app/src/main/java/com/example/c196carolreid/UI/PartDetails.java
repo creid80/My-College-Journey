@@ -3,6 +3,7 @@ package com.example.c196carolreid.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.example.c196carolreid.R;
 
