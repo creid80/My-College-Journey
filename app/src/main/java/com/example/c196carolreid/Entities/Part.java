@@ -1,4 +1,4 @@
-package com.example.c196carolreid.entities;
+package com.example.c196carolreid.Entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

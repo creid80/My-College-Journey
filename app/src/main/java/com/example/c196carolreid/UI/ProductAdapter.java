@@ -11,10 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.c196carolreid.R;
-import com.example.c196carolreid.entities.Product;
+import com.example.c196carolreid.Entities.Product;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 

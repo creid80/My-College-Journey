@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">C196CarolReid</string>
+    <string name="save_part">Save Part</string>
+    <string name="share_note">Share Note</string>
+    <string name="notify">Notify</string>
+    <string name="save_product">Save Product</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="add_sample_parts">Add Sample Parts</string>
+    <string name="add_sample_products">Add Sample Products</string>
 </resources>

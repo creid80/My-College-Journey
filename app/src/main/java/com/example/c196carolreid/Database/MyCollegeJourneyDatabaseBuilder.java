@@ -6,10 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.c196carolreid.dao.PartDAO;
-import com.example.c196carolreid.dao.ProductDAO;
-import com.example.c196carolreid.entities.Part;
-import com.example.c196carolreid.entities.Product;
+import com.example.c196carolreid.DAO.PartDAO;
+import com.example.c196carolreid.DAO.ProductDAO;
+import com.example.c196carolreid.Entities.Part;
+import com.example.c196carolreid.Entities.Product;
 
 @Database(entities = {Product.class, Part.class}, version = 1, exportSchema = false)
 public abstract class MyCollegeJourneyDatabaseBuilder extends RoomDatabase {

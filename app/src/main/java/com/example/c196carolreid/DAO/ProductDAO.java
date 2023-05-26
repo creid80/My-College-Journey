@@ -1,4 +1,4 @@
-package com.example.c196carolreid.dao;
+package com.example.c196carolreid.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.c196carolreid.entities.Product;
+import com.example.c196carolreid.Entities.Product;
 
 import java.util.List;
 
