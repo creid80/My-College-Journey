@@ -12,27 +12,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Repository {
-
     private PartDAO mPartDAO;
     private ProductDAO mProductDAO;
     private List<Product> mAllProducts;
     private List<Part> mAllParts;
 
-    private static int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    private static int NUMBER_OF_THREADS=4;
+    static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public Repository(Application application) {
-
-        MyCollegeJourneyDatabaseBuilder db = MyCollegeJourneyDatabaseBuilder.getDatabase(application);
-        mPartDAO = db.partDAO();
-        mProductDAO = db.productDAO();
+    public Repository(Application application){
+        MyCollegeJourneyDatabaseBuilder db=MyCollegeJourneyDatabaseBuilder.getDatabase(application);
+        mPartDAO=db.partDAO();
+        mProductDAO=db.productDAO();
     }
-
-    public List<Product> getAllProducts() {
-
-        databaseExecutor.execute(() -> {
-            mAllProducts = mProductDAO.getAllProducts();
+    public List<Product>getAllProducts(){
+        databaseExecutor.execute(()->{
+            mAllProducts=mProductDAO.getAllProducts();
         });
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -40,10 +37,8 @@ public class Repository {
         }
         return mAllProducts;
     }
-
-    public void insert(Product product) {
-
-        databaseExecutor.execute(() -> {
+    public void insert(Product product){
+        databaseExecutor.execute(()->{
             mProductDAO.insert(product);
         });
         try {
@@ -52,11 +47,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
-    public void update(Product product) {
-
-        databaseExecutor.execute(() -> {
-          mProductDAO.update(product);
+    public void update(Product product){
+        databaseExecutor.execute(()->{
+            mProductDAO.update(product);
         });
         try {
             Thread.sleep(1000);
@@ -64,11 +57,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
-    public void delete(Product product) {
-
-        databaseExecutor.execute(() -> {
-          mProductDAO.delete(product);
+    public void delete(Product product){
+        databaseExecutor.execute(()->{
+            mProductDAO.delete(product);
         });
         try {
             Thread.sleep(1000);
@@ -76,12 +67,11 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
-    public List<Part> getAllParts() {
-
-        databaseExecutor.execute(() -> {
-            mAllParts = mPartDAO.getAllParts();
+    public List<Part>getAllParts(){
+        databaseExecutor.execute(()->{
+            mAllParts=mPartDAO.getAllParts();
         });
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -89,10 +79,8 @@ public class Repository {
         }
         return mAllParts;
     }
-
-    public void insert(Part part) {
-
-        databaseExecutor.execute(() -> {
+    public void insert(Part part){
+        databaseExecutor.execute(()->{
             mPartDAO.insert(part);
         });
         try {
@@ -101,10 +89,8 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
-    public void update(Part part) {
-
-        databaseExecutor.execute(() -> {
+    public void update(Part part){
+        databaseExecutor.execute(()->{
             mPartDAO.update(part);
         });
         try {
@@ -113,10 +99,8 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
-    public void delete(Part part) {
-
-        databaseExecutor.execute(() -> {
+    public void delete(Part part){
+        databaseExecutor.execute(()->{
             mPartDAO.delete(part);
         });
         try {
@@ -126,3 +110,4 @@ public class Repository {
         }
     }
 }
+

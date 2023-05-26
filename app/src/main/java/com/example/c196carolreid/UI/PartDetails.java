@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class PartDetails extends AppCompatActivity {
-
     String name;
     Double price;
     int partID;
@@ -165,7 +164,7 @@ public class PartDetails extends AppCompatActivity {
                 }
                 Long trigger=myDate.getTime();
                 Intent intent= new Intent(PartDetails.this,MyReceiver.class);
-                intent.putExtra("key","message I want to see");
+                intent.putExtra("key" ,dateFromScreen + " should trigger.");
                 PendingIntent sender=PendingIntent.getBroadcast(PartDetails.this, ++MainActivity.numAlert,intent,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);

@@ -11,20 +11,18 @@ import com.example.c196carolreid.DAO.ProductDAO;
 import com.example.c196carolreid.Entities.Part;
 import com.example.c196carolreid.Entities.Product;
 
-@Database(entities = {Product.class, Part.class}, version = 1, exportSchema = false)
+@Database(entities = {Product.class, Part.class}, version = 1,exportSchema = false)
 public abstract class MyCollegeJourneyDatabaseBuilder extends RoomDatabase {
-
     public abstract ProductDAO productDAO();
     public abstract PartDAO partDAO();
 
     private static volatile MyCollegeJourneyDatabaseBuilder INSTANCE;
 
-    static MyCollegeJourneyDatabaseBuilder getDatabase(final Context context) {
-
-        if(INSTANCE == null) {
-            synchronized (MyCollegeJourneyDatabaseBuilder.class) {
-                if(INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), MyCollegeJourneyDatabaseBuilder.class, "MyCollegeJourney.db")
+    static MyCollegeJourneyDatabaseBuilder getDatabase(final Context context){
+        if(INSTANCE==null){
+            synchronized (MyCollegeJourneyDatabaseBuilder.class){
+                if(INSTANCE==null){
+                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(),MyCollegeJourneyDatabaseBuilder.class,"MyCollegeJourneyDatabase.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

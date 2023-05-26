@@ -13,7 +13,6 @@ import java.util.List;
 
 @Dao
 public interface ProductDAO {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Product product);
 

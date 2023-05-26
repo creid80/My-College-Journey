@@ -23,8 +23,8 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         private final TextView partItemView2;
         private PartViewHolder(View itemView){
             super(itemView);
-            partItemView=itemView.findViewById(R.id.textViewpartname);
-            partItemView2=itemView.findViewById(R.id.textViewpartprice);
+            partItemView=itemView.findViewById(R.id.textView2);
+            partItemView2=itemView.findViewById(R.id.textView3);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -60,13 +60,13 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         if(mParts!=null){
             Part current=mParts.get(position);
             String name=current.getPartName();
-            double price= current.getPartPrice();
+            int prodID= current.getProductID();
             holder.partItemView.setText(name);
-            holder.partItemView2.setText(Double.toString(price));
+            holder.partItemView2.setText(Integer.toString(prodID));
         }
         else{
             holder.partItemView.setText("No part name");
-            holder.partItemView.setText("No part price");
+            holder.partItemView.setText("No product id");
         }
     }
 
