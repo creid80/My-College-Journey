@@ -302,7 +302,7 @@ public class CourseDetails extends AppCompatActivity {
                 }
                 Long trigger2=myDate2.getTime();
                 Intent intent2= new Intent(CourseDetails.this,MyReceiver.class);
-                intent2.putExtra("key" ,dateFromScreen2 + "- The " + name + " course starts today.");
+                intent2.putExtra("key" ,dateFromScreen2 + "- The " + name + " course ends today.");
                 PendingIntent sender2=PendingIntent.getBroadcast(CourseDetails.this, ++MainActivity.numAlert,intent2,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);

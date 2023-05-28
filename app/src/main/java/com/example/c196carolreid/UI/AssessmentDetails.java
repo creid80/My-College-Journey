@@ -238,7 +238,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 }
                 Long trigger2=myDate2.getTime();
                 Intent intent2= new Intent(AssessmentDetails.this,MyReceiver.class);
-                intent2.putExtra("key" ,dateFromScreen2 + "- The " + name + " assessment starts today.");
+                intent2.putExtra("key" ,dateFromScreen2 + "- The " + name + " assessment ends today.");
                 PendingIntent sender2=PendingIntent.getBroadcast(AssessmentDetails.this, ++MainActivity.numAlert,intent2,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);

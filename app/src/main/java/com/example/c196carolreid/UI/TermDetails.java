@@ -49,7 +49,6 @@ public class TermDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        System.out.println("In on Create");
         setContentView(R.layout.activity_term_details);
         name = getIntent().getStringExtra("name");
         editName = findViewById(R.id.termname);
