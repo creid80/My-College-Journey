@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.PartDetails">
+    tools:context=".UI.CourseDetails">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:id="@+id/partName"/>
+                android:id="@+id/courseName"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -42,7 +42,7 @@
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:id="@+id/partPrice"/>
+                android:id="@+id/coursePrice"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

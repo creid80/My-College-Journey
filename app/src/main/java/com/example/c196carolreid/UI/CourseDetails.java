@@ -17,8 +17,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.c196carolreid.Database.Repository;
-import com.example.c196carolreid.Entities.Part;
-import com.example.c196carolreid.Entities.Product;
+import com.example.c196carolreid.Entities.Course;
+import com.example.c196carolreid.Entities.Term;
 import com.example.c196carolreid.R;
 
 import java.text.ParseException;
@@ -28,11 +28,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class PartDetails extends AppCompatActivity {
+public class CourseDetails extends AppCompatActivity {
     String name;
     Double price;
-    int partID;
-    int prodID;
+    int courseID;
+    int termID;
     EditText editName;
     EditText editPrice;
     EditText editNote;
@@ -44,31 +44,31 @@ public class PartDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_part_details);
+        setContentView(R.layout.activity_course_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         repository=new Repository(getApplication());
         name = getIntent().getStringExtra("name");
-        editName = findViewById(R.id.partName);
+        editName = findViewById(R.id.courseName);
         editName.setText(name);
         price = getIntent().getDoubleExtra("price", -1.0);
-        editPrice = findViewById(R.id.partPrice);
+        editPrice = findViewById(R.id.coursePrice);
         editPrice.setText(Double.toString(price));
-        partID = getIntent().getIntExtra("id", -1);
-        prodID = getIntent().getIntExtra("prodID", -1);
+        courseID = getIntent().getIntExtra("id", -1);
+        termID = getIntent().getIntExtra("termID", -1);
         editNote=findViewById(R.id.note);
         editDate=findViewById(R.id.date);
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        ArrayList<Product> productArrayList= new ArrayList<>();
-        productArrayList.addAll(repository.getAllProducts());
-        ArrayList<Integer> productIdList= new ArrayList<>();
-        for(Product product:productArrayList){
-            productIdList.add(product.getProductID());
+        ArrayList<Term> termArrayList= new ArrayList<>();
+        termArrayList.addAll(repository.getAllTerms());
+        ArrayList<Integer> termIdList= new ArrayList<>();
+        for(Term term:termArrayList){
+            termIdList.add(term.getTermID());
         }
-        ArrayAdapter<Integer> productIdAdapter= new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item,productIdList);
+        ArrayAdapter<Integer> termIdAdapter= new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item,termIdList);
         Spinner spinner=findViewById(R.id.spinner);
-        spinner.setAdapter(productIdAdapter);
+        spinner.setAdapter(termIdAdapter);
         startDate = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -100,7 +100,7 @@ public class PartDetails extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                new DatePickerDialog(PartDetails.this, startDate, myCalendarStart
+                new DatePickerDialog(CourseDetails.this, startDate, myCalendarStart
                         .get(Calendar.YEAR), myCalendarStart.get(Calendar.MONTH),
                         myCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -116,7 +116,7 @@ public class PartDetails extends AppCompatActivity {
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_partdetails, menu);
+        getMenuInflater().inflate(R.menu.menu_coursedetails, menu);
         return true;
     }
 
@@ -129,18 +129,18 @@ public class PartDetails extends AppCompatActivity {
 //                startActivity(intent);
 //                return true;
 
-            case R.id.partsave:
-                Part part;
-                if (partID == -1) {
-                    if (repository.getAllParts().size() == 0)
-                        partID = 1;
+            case R.id.coursesave:
+                Course course;
+                if (courseID == -1) {
+                    if (repository.getAllCourses().size() == 0)
+                        courseID = 1;
                     else
-                        partID = repository.getAllParts().get(repository.getAllParts().size() - 1).getPartID() + 1;
-                    part = new Part(partID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()), prodID);
-                    repository.insert(part);
+                        courseID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
+                    course = new Course(courseID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()), termID);
+                    repository.insert(course);
                 } else {
-                    part = new Part(partID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()), prodID);
-                    repository.update(part);
+                    course = new Course(courseID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()), termID);
+                    repository.update(course);
                 }
                 return true;
             case R.id.share:
@@ -163,9 +163,9 @@ public class PartDetails extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Long trigger=myDate.getTime();
-                Intent intent= new Intent(PartDetails.this,MyReceiver.class);
+                Intent intent= new Intent(CourseDetails.this,MyReceiver.class);
                 intent.putExtra("key" ,dateFromScreen + " should trigger.");
-                PendingIntent sender=PendingIntent.getBroadcast(PartDetails.this, ++MainActivity.numAlert,intent,PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent sender=PendingIntent.getBroadcast(CourseDetails.this, ++MainActivity.numAlert,intent,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
                 return true;

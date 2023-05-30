@@ -11,36 +11,36 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.c196carolreid.Database.Repository;
+import com.example.c196carolreid.Entities.Term;
 import com.example.c196carolreid.R;
-import com.example.c196carolreid.Entities.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ProductList extends AppCompatActivity {
+public class TermList extends AppCompatActivity {
     private Repository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_term_list);
         FloatingActionButton fab=findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ProductList.this,ProductDetails.class);
+                Intent intent=new Intent(TermList.this, TermDetails.class);
                 startActivity(intent);
             }
         });
         repository=new Repository(getApplication());
-        List<Product> allProducts=repository.getAllProducts();
+        List<Term> allTerms=repository.getAllTerms();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
-        final ProductAdapter productAdapter=new ProductAdapter(this);
-        recyclerView.setAdapter(productAdapter);
+        final TermAdapter termAdapter =new TermAdapter(this);
+        recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        productAdapter.setProducts(allProducts);
+        termAdapter.setTerms(allTerms);
     }
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_productlist, menu);
+        getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item){
@@ -51,18 +51,18 @@ public class ProductList extends AppCompatActivity {
 //                startActivity(intent);
                 return true;
 
-            case R.id.addSampleProducts:
+            case R.id.addSampleTerms:
                 Repository repo = new Repository(getApplication());
-                Product product = new Product(1, "bicycle", 100.0);
-                repo.insert(product);
-                product = new Product(2, "tricycle", 150.0);
-                repo.insert(product);
-                List<Product> allProducts=repository.getAllProducts();
+                Term term = new Term(1, "Term 1", 100.0);
+                repo.insert(term);
+                term = new Term(2, "Term 2", 150.0);
+                repo.insert(term);
+                List<Term> allTerms=repository.getAllTerms();
                 RecyclerView recyclerView=findViewById(R.id.recyclerview);
-                final ProductAdapter productAdapter=new ProductAdapter(this);
-                recyclerView.setAdapter(productAdapter);
+                final TermAdapter termAdapter =new TermAdapter(this);
+                recyclerView.setAdapter(termAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                productAdapter.setProducts(allProducts);
+                termAdapter.setTerms(allTerms);
 
                 return true;
         }
@@ -72,12 +72,12 @@ public class ProductList extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
-        List<Product> allProducts=repository.getAllProducts();
+        List<Term> allTerms =repository.getAllTerms();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
-        final ProductAdapter productAdapter=new ProductAdapter(this);
-        recyclerView.setAdapter(productAdapter);
+        final TermAdapter termAdapter =new TermAdapter(this);
+        recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        productAdapter.setProducts(allProducts);
+        termAdapter.setTerms(allTerms);
 
         //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
     }

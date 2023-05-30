@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ProductDetails">
+    tools:context=".UI.TermDetails">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton2"
@@ -42,10 +42,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Name" />
+                    android:text="Term Name" />
 
                 <EditText
-                    android:id="@+id/productname"
+                    android:id="@+id/termname"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -57,10 +57,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Price" />
+                    android:text="Term Price" />
 
                 <EditText
-                    android:id="@+id/productprice"
+                    android:id="@+id/termprice"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -72,10 +72,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product PriceB" />
+                    android:text="Term PriceB" />
 
                 <EditText
-                    android:id="@+id/productpriceB"
+                    android:id="@+id/termpriceB"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -87,10 +87,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Price C" />
+                    android:text="Term Price C" />
 
                 <EditText
-                    android:id="@+id/productpriceC"
+                    android:id="@+id/termpriceC"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -102,10 +102,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product PriceD" />
+                    android:text="Term PriceD" />
 
                 <EditText
-                    android:id="@+id/productpriced"
+                    android:id="@+id/termpriced"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -117,10 +117,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product PriceE" />
+                    android:text="Term PriceE" />
 
                 <EditText
-                    android:id="@+id/productpricee"
+                    android:id="@+id/termpricee"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -132,10 +132,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product PriceF" />
+                    android:text="Term PriceF" />
 
                 <EditText
-                    android:id="@+id/productpricef"
+                    android:id="@+id/termpricef"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -143,7 +143,7 @@
     </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/partrecyclerview"
+        android:id="@+id/courserecyclerview"
         android:layout_width="409dp"
         android:layout_height="464dp"
         tools:layout_editor_absoluteX="1dp"

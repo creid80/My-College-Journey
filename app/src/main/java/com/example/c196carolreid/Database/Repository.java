@@ -2,32 +2,32 @@ package com.example.c196carolreid.Database;
 
 import android.app.Application;
 
-import com.example.c196carolreid.DAO.PartDAO;
-import com.example.c196carolreid.DAO.ProductDAO;
-import com.example.c196carolreid.Entities.Part;
-import com.example.c196carolreid.Entities.Product;
+import com.example.c196carolreid.DAO.CourseDAO;
+import com.example.c196carolreid.DAO.TermDAO;
+import com.example.c196carolreid.Entities.Course;
+import com.example.c196carolreid.Entities.Term;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Repository {
-    private PartDAO mPartDAO;
-    private ProductDAO mProductDAO;
-    private List<Product> mAllProducts;
-    private List<Part> mAllParts;
+    private CourseDAO mCourseDAO;
+    private TermDAO mTermDAO;
+    private List<Term> mAllTerms;
+    private List<Course> mAllCourses;
 
     private static int NUMBER_OF_THREADS=4;
     static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public Repository(Application application){
         MyCollegeJourneyDatabaseBuilder db=MyCollegeJourneyDatabaseBuilder.getDatabase(application);
-        mPartDAO=db.partDAO();
-        mProductDAO=db.productDAO();
+        mCourseDAO =db.courseDAO();
+        mTermDAO =db.termDAO();
     }
-    public List<Product>getAllProducts(){
+    public List<Term> getAllTerms(){
         databaseExecutor.execute(()->{
-            mAllProducts=mProductDAO.getAllProducts();
+            mAllTerms = mTermDAO.getAllTerms();
         });
 
         try {
@@ -35,11 +35,11 @@ public class Repository {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return mAllProducts;
+        return mAllTerms;
     }
-    public void insert(Product product){
+    public void insert(Term term){
         databaseExecutor.execute(()->{
-            mProductDAO.insert(product);
+            mTermDAO.insert(term);
         });
         try {
             Thread.sleep(1000);
@@ -47,9 +47,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-    public void update(Product product){
+    public void update(Term term){
         databaseExecutor.execute(()->{
-            mProductDAO.update(product);
+            mTermDAO.update(term);
         });
         try {
             Thread.sleep(1000);
@@ -57,9 +57,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-    public void delete(Product product){
+    public void delete(Term term){
         databaseExecutor.execute(()->{
-            mProductDAO.delete(product);
+            mTermDAO.delete(term);
         });
         try {
             Thread.sleep(1000);
@@ -67,9 +67,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-    public List<Part>getAllParts(){
+    public List<Course> getAllCourses(){
         databaseExecutor.execute(()->{
-            mAllParts=mPartDAO.getAllParts();
+            mAllCourses = mCourseDAO.getAllCourses();
         });
 
         try {
@@ -77,11 +77,11 @@ public class Repository {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return mAllParts;
+        return mAllCourses;
     }
-    public void insert(Part part){
+    public void insert(Course course){
         databaseExecutor.execute(()->{
-            mPartDAO.insert(part);
+            mCourseDAO.insert(course);
         });
         try {
             Thread.sleep(1000);
@@ -89,9 +89,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-    public void update(Part part){
+    public void update(Course course){
         databaseExecutor.execute(()->{
-            mPartDAO.update(part);
+            mCourseDAO.update(course);
         });
         try {
             Thread.sleep(1000);
@@ -99,9 +99,9 @@ public class Repository {
             e.printStackTrace();
         }
     }
-    public void delete(Part part){
+    public void delete(Course course){
         databaseExecutor.execute(()->{
-            mPartDAO.delete(part);
+            mCourseDAO.delete(course);
         });
         try {
             Thread.sleep(1000);

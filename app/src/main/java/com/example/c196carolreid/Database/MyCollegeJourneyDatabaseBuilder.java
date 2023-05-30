@@ -6,15 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.c196carolreid.DAO.PartDAO;
-import com.example.c196carolreid.DAO.ProductDAO;
-import com.example.c196carolreid.Entities.Part;
-import com.example.c196carolreid.Entities.Product;
+import com.example.c196carolreid.DAO.CourseDAO;
+import com.example.c196carolreid.DAO.TermDAO;
+import com.example.c196carolreid.Entities.Course;
+import com.example.c196carolreid.Entities.Term;
 
-@Database(entities = {Product.class, Part.class}, version = 1,exportSchema = false)
+@Database(entities = {Term.class, Course.class}, version = 2,exportSchema = false)
 public abstract class MyCollegeJourneyDatabaseBuilder extends RoomDatabase {
-    public abstract ProductDAO productDAO();
-    public abstract PartDAO partDAO();
+    public abstract TermDAO termDAO();
+    public abstract CourseDAO courseDAO();
 
     private static volatile MyCollegeJourneyDatabaseBuilder INSTANCE;
 

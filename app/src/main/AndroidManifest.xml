@@ -17,27 +17,27 @@
             android:exported="true"></receiver>
 
         <activity
-            android:name=".UI.PartDetails"
+            android:name=".UI.CourseDetails"
             android:exported="false"
-            android:label="Part Details"
-            android:parentActivityName=".UI.ProductDetails">
+            android:label="Course Details"
+            android:parentActivityName=".UI.TermDetails">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.ProductDetails"
+            android:name=".UI.TermDetails"
             android:exported="false"
-            android:label="Product Details"
-            android:parentActivityName=".UI.ProductList">
+            android:label="Term Details"
+            android:parentActivityName=".UI.TermList">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.ProductList"
+            android:name=".UI.TermList"
             android:exported="false"
-            android:label="Product List"
+            android:label="Term List"
             android:parentActivityName=".UI.MainActivity">
             <meta-data
                 android:name="android.app.lib_name"

@@ -7,21 +7,21 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.c196carolreid.Entities.Product;
+import com.example.c196carolreid.Entities.Term;
 
 import java.util.List;
 
 @Dao
-public interface ProductDAO {
+public interface TermDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Product product);
+    void insert(Term term);
 
     @Update
-    void update(Product product);
+    void update(Term term);
 
     @Delete
-    void delete(Product product);
+    void delete(Term term);
 
-    @Query("SELECT * FROM PRODUCTS ORDER BY productID ASC")
-    List<Product> getAllProducts();
+    @Query("SELECT * FROM terms ORDER BY termID ASC")
+    List<Term> getAllTerms();
 }
