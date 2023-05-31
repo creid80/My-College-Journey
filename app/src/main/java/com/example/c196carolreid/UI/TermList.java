@@ -53,9 +53,9 @@ public class TermList extends AppCompatActivity {
 
             case R.id.addSampleTerms:
                 Repository repo = new Repository(getApplication());
-                Term term = new Term(1, "Term 1", 100.0);
+                Term term = new Term(1, "Term 1", "11/12/84", "12/12/84");
                 repo.insert(term);
-                term = new Term(2, "Term 2", 150.0);
+                term = new Term(2, "Term 2", "10/15/84", "11/15/84");
                 repo.insert(term);
                 List<Term> allTerms=repository.getAllTerms();
                 RecyclerView recyclerView=findViewById(R.id.recyclerview);

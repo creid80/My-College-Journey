@@ -8,12 +8,14 @@ public class Term {
     @PrimaryKey(autoGenerate = true)
     private int TermID;
     private String termName;
-    private double termPrice;
+    private String termStart;
+    private String termEnd;
 
-    public Term(int TermID, String termName, double termPrice) {
+    public Term(int TermID, String termName, String termStart, String termEnd) {
         this.TermID = TermID;
         this.termName = termName;
-        this.termPrice = termPrice;
+        this.termStart = termStart;
+        this.termEnd = termEnd;
     }
 
     public Term() {
@@ -35,11 +37,15 @@ public class Term {
         this.termName = termName;
     }
 
-    public double getTermPrice() {
-        return termPrice;
+    public String getTermStart() {
+        return termStart;
     }
 
-    public void setTermPrice(double termPrice) {
-        this.termPrice = termPrice;
+    public void setTermStart(String termStart) {
+        this.termStart = termStart;
     }
+
+    public String getTermEnd() { return termEnd; }
+
+    public void setTermEnd(String termEnd) { this.termEnd = termEnd; }
 }

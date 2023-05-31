@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,18 +20,29 @@ import com.example.c196carolreid.Entities.Term;
 import com.example.c196carolreid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TermDetails extends AppCompatActivity {
     String name;
-    double price;
+    String start;
+    String end;
     int termID;
     EditText editName;
-    EditText editPrice;
+    EditText editStart;
+    EditText editEnd;
     Repository repository;
     Term currentTerm;
     int numCourses;
+    DatePickerDialog.OnDateSetListener startDate;
+    DatePickerDialog.OnDateSetListener endDate;
+    final Calendar myCalendarStart = Calendar.getInstance();
+    final Calendar myCalendarEnd = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +51,91 @@ public class TermDetails extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         editName = findViewById(R.id.termname);
         editName.setText(name);
-        price = getIntent().getDoubleExtra("price", -1.0);
-        editPrice = findViewById(R.id.termprice);
-        editPrice.setText(Double.toString(price));
+        start = getIntent().getStringExtra("start");
+        editStart = findViewById(R.id.termstart);
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        startDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+
+                myCalendarStart.set(Calendar.YEAR, year);
+                myCalendarStart.set(Calendar.MONTH, monthOfYear);
+                myCalendarStart.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+
+                updateLabelStart();
+            }
+
+        };
+
+        editStart.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Date date;
+                //get value from other screen,but I'm going to hard code it right now
+                String info=editStart.getText().toString();
+                if(info.equals(""))info="02/10/22";
+                try{
+                    myCalendarStart.setTime(sdf.parse(info));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                new DatePickerDialog(TermDetails.this, startDate, myCalendarStart
+                        .get(Calendar.YEAR), myCalendarStart.get(Calendar.MONTH),
+                        myCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        end = getIntent().getStringExtra("end");
+        editEnd = findViewById(R.id.termend);
+
+
+        endDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+
+                myCalendarEnd.set(Calendar.YEAR, year);
+                myCalendarEnd.set(Calendar.MONTH, monthOfYear);
+                myCalendarEnd.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+
+                updateLabelStart();
+            }
+
+        };
+
+        editEnd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Date date;
+                //get value from other screen,but I'm going to hard code it right now
+                String info=editEnd.getText().toString();
+                if(info.equals(""))info="02/10/22";
+                try{
+                    myCalendarStart.setTime(sdf.parse(info));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                new DatePickerDialog(TermDetails.this, endDate, myCalendarEnd
+                        .get(Calendar.YEAR), myCalendarEnd.get(Calendar.MONTH),
+                        myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
+
         termID = getIntent().getIntExtra("id", -1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView = findViewById(R.id.courserecyclerview);
@@ -65,6 +160,20 @@ public class TermDetails extends AppCompatActivity {
         });
     }
 
+    private void updateLabelStart() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        editStart.setText(sdf.format(myCalendarStart.getTime()));
+    }
+
+    private void updateLabelEnd() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        editEnd.setText(sdf.format(myCalendarEnd.getTime()));
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_termdetails, menu);
         return true;
@@ -81,10 +190,10 @@ public class TermDetails extends AppCompatActivity {
                     if (repository.getAllTerms().size() == 0) termID = 1;
                     else
                         termID = repository.getAllTerms().get(repository.getAllTerms().size() - 1).getTermID() + 1;
-                    term = new Term(termID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
+                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.insert(term);
                 } else {
-                    term = new Term(termID, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
+                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.update(term);
                 }
                 return true;
