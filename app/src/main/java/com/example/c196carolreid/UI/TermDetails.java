@@ -53,6 +53,7 @@ public class TermDetails extends AppCompatActivity {
         editName.setText(name);
         start = getIntent().getStringExtra("start");
         editStart = findViewById(R.id.termstart);
+        editStart.setText(start);
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -95,6 +96,7 @@ public class TermDetails extends AppCompatActivity {
 
         end = getIntent().getStringExtra("end");
         editEnd = findViewById(R.id.termend);
+        editEnd.setText(end);
 
 
         endDate = new DatePickerDialog.OnDateSetListener() {
@@ -109,7 +111,7 @@ public class TermDetails extends AppCompatActivity {
                 myCalendarEnd.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 
-                updateLabelStart();
+                updateLabelEnd();
             }
 
         };
