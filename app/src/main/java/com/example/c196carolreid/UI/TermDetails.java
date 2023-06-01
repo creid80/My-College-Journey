@@ -226,9 +226,11 @@ public class TermDetails extends AppCompatActivity {
                     if (repository.getAllCourses().size() == 0) courseID = 1;
                     else
                         courseID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                    Course course = new Course(courseID, "English", 10, termID);
+                    Course course = new Course(courseID, "English", "11/11/11", "12/12/12", "In Progress", "Howard", "879-898-9474",
+                                               "j@hotmail.com", "Note", termID);
                     repository.insert(course);
-                    course = new Course(++courseID, "Science", 10, termID);
+                    course = new Course(++courseID, "Science","11/11/11", "12/12/12", "In Progress", "Howard", "879-898-9474",
+                            "j@hotmail.com", "Note", termID);
                     repository.insert(course);
                     RecyclerView recyclerView = findViewById(R.id.courserecyclerview);
                     final CourseAdapter courseAdapter = new CourseAdapter(this);
