@@ -53,6 +53,7 @@ public class CourseDetails extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,7 @@ public class CourseDetails extends AppCompatActivity {
         termArrayList.add("Plan to Take");
 
         ArrayAdapter<String> termIdAdapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,termArrayList);
-        Spinner spinner=findViewById(R.id.courseStatus);
+        spinner=findViewById(R.id.courseStatus);
         spinner.setAdapter(termIdAdapter);
         status = getIntent().getStringExtra("status");
         int position = termIdAdapter.getPosition(status);
@@ -160,7 +161,7 @@ public class CourseDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info= editEnd.getText().toString();
-                if(info.equals(""))info="02/10/22";
+                if(info.equals(""))info="11/12/84";
                 try{
                     myCalendarEnd.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -209,13 +210,14 @@ public class CourseDetails extends AppCompatActivity {
                         courseID = 1;
                     else
                         courseID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
+                        //editStatus = spinner.getSelectedItem();
                     course = new Course(courseID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(),
-                                        editStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(),
+                                        spinner.getSelectedItem().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(),
                                         editCIEmail.getText().toString(), editNote.getText().toString(), termID);
                     repository.insert(course);
                 } else {
                     course = new Course(courseID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(),
-                            editStatus.getText().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(),
+                            spinner.getSelectedItem().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(),
                             editCIEmail.getText().toString(), editNote.getText().toString(), termID);
                     repository.update(course);
                 }

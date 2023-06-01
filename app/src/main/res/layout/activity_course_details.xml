@@ -19,115 +19,192 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_width="127dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="Name:"
-                android:textSize="20dp"/>
+                android:paddingTop="10dp"
+                android:text="Course Name:"
+                android:textSize="20dp"
+                />
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/courseName"/>
+                android:id="@+id/courseName"
+                android:layout_width="230dp"
+                android:layout_height="match_parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_margin="2dp"
-                android:layout_width="200dp"
+                android:layout_width="95dp"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:paddingTop="10dp"
                 android:text="Start Date:"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
+
             <EditText
-                android:layout_width="200dp"
+                android:id="@+id/courseStart"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:inputType="none"
                 android:hint="11/12/84"
-                android:id="@+id/courseStart"/>
+                android:inputType="none" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:paddingTop="10dp"
                 android:text="End Date:"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
+
             <EditText
+                android:id="@+id/courseEnd"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:hint="11/12/84"
+                android:inputType="none" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#9FEF41"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:inputType="none"
-                android:hint="11/12/84"
-                android:id="@+id/courseEnd"/>
+                android:layout_margin="2dp"
+                android:text="Course Instructor:"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="58dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="CI Name:"
-                android:textSize="20dp"/>
+                android:paddingTop="10dp"
+                android:text="Name:"
+                android:textSize="20dp" />
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/courseCIName"/>
+                android:id="@+id/courseCIName"
+                android:layout_width="250dp"
+                android:layout_height="match_parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="CI Phone:"
-                android:textSize="20dp"/>
+                android:paddingTop="10dp"
+                android:text="Phone:"
+                android:textSize="20dp" />
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/courseCIPhone"/>
+                android:id="@+id/courseCIPhone"
+                android:layout_width="246dp"
+                android:layout_height="match_parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="CI Email:"
-                android:textSize="20dp"/>
+                android:paddingTop="10dp"
+                android:text="Email:"
+                android:textSize="20dp" />
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/courseCIEmail"/>
+                android:id="@+id/courseCIEmail"
+                android:layout_width="254dp"
+                android:layout_height="match_parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#9FEF41"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="Note"
-                android:textSize="20dp"/>
+                android:paddingTop="10dp"
+                android:text="Note:"
+                android:textSize="20dp" />
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:id="@+id/note"/>
+                android:id="@+id/note"
+                android:layout_width="261dp"
+                android:layout_height="match_parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-        <Spinner
-            android:id="@+id/courseStatus"
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:text="Status:"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/courseStatus"
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#9FEF41"
+            android:layout_marginTop="8dp"
+
+            android:paddingBottom="10dp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
