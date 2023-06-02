@@ -6,15 +6,18 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.c196carolreid.DAO.AssessmentDAO;
 import com.example.c196carolreid.DAO.CourseDAO;
 import com.example.c196carolreid.DAO.TermDAO;
+import com.example.c196carolreid.Entities.Assessment;
 import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.Entities.Term;
 
-@Database(entities = {Term.class, Course.class}, version = 4,exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class}, version = 6,exportSchema = false)
 public abstract class MyCollegeJourneyDatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
+    public abstract AssessmentDAO assessmentDAO();
 
     private static volatile MyCollegeJourneyDatabaseBuilder INSTANCE;
 

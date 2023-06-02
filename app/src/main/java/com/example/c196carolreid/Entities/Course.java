@@ -32,8 +32,7 @@ public class Course {
         this.TermID = TermID;
     }
 
-    public Course() {
-    }
+    public Course() {}
 
     public int getCourseID() {
         return courseID;
