@@ -67,13 +67,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         if(mCourses !=null){
             Course current= mCourses.get(position);
             String name=current.getCourseName();
-            int termID= current.getTermID();
+            String status = current.getStatus();
             holder.courseItemView.setText(name);
-            holder.courseItemView2.setText(Integer.toString(termID));
+            holder.courseItemView2.setText(status);
         }
         else{
             holder.courseItemView.setText("No course name");
-            holder.courseItemView.setText("No term id");
+            holder.courseItemView.setText("No status selected");
         }
     }
 

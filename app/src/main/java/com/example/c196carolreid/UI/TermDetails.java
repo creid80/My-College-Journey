@@ -183,7 +183,7 @@ public class TermDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case R.id.allterms:
                 this.finish();
                 return true;
             case R.id.termsave:
@@ -216,8 +216,10 @@ public class TermDetails extends AppCompatActivity {
                     Toast.makeText(TermDetails.this, "Can't delete a term with courses", Toast.LENGTH_LONG).show();
                 }
                 return true;
-            case R.id.addSampleCourses:
-                if (termID == -1)
+            case R.id.addNewCourse:
+                Intent intent2=new Intent(TermDetails.this, CourseDetails.class);
+                startActivity(intent2);
+               /* if (termID == -1)
                     Toast.makeText(TermDetails.this, "Please save term before adding courses", Toast.LENGTH_LONG).show();
 
                 else {
@@ -243,6 +245,8 @@ public class TermDetails extends AppCompatActivity {
                     courseAdapter.setCourses(filteredCourses);
                     return true;
                 }
+
+                */
         }
         return super.onOptionsItemSelected(item);
     }

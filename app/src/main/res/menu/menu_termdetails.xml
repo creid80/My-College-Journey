@@ -2,10 +2,12 @@
 
     <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:title="All Terms" android:id="@+id/allterms"/>
+
     <item android:title="@string/save_term" android:id="@+id/termsave"/>
 
     <item android:title="@string/delete_term" android:id="@+id/termdelete"/>
 
-    <item android:title="@string/add_sample_courses" android:id="@+id/addSampleCourses"/>
+    <item android:title="@string/add_new_course" android:id="@+id/addNewCourse"/>
 
 </menu>

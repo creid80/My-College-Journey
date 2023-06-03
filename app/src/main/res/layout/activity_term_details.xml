@@ -12,18 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginRight="16dp"
-
+        android:backgroundTint="#C685FF"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:backgroundTint="#F2892E"
+        app:backgroundTint="#46D437"
+        app:borderWidth="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <ScrollView
         android:id="@+id/scrollview"
-        android:layout_width="409dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp"
@@ -31,7 +32,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -43,12 +44,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Name:"
+                    android:text="Name:"
                     android:textSize="20dp"/>
 
                 <EditText
                     android:id="@+id/termname"
-                    android:layout_width="200dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -59,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Start Date:"
+                    android:text="Start Date:"
                     android:textSize="20dp"/>
 
                 <EditText
@@ -75,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term End Date:"
+                    android:text="End Date:"
                     android:textSize="20dp"/>
 
                 <EditText
@@ -86,18 +87,40 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:paddingTop="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_margin="10dp"
                 android:background="#FFF658"/>
+            <LinearLayout
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:text="Course"
+                    android:textSize="25dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="174dp"
+                    android:layout_height="wrap_content"
+                    android:text = "Status"
+                    android:textSize="25dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courserecyclerview"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="464dp"
+        android:layout_margin="10dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="201dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollview"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
