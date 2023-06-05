@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.c196carolreid.Database.Repository;
 import com.example.c196carolreid.Entities.Assessment;
+import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.R;
 
 import java.text.ParseException;
@@ -39,6 +40,7 @@ public class AssessmentDetails extends AppCompatActivity {
     EditText editStart;
     EditText editEnd;
     Repository repository;
+    Assessment currentAssessment;
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar myCalendarStart = Calendar.getInstance();
@@ -173,12 +175,10 @@ public class AssessmentDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
+            case R.id.allterms:
+                Intent intentHome=new Intent(AssessmentDetails.this,TermList.class);
+                startActivity(intentHome);
                 return true;
-//                Intent intent=new Intent(PartDetails.this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
 
             case R.id.assessmentsave:
                 Assessment assessment;
@@ -195,7 +195,8 @@ public class AssessmentDetails extends AppCompatActivity {
                             spinner.getSelectedItem().toString(), courseID);
                     repository.update(assessment);
                 }
-                return true;
+                this.finish();
+                break;
             case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
                 String myFormat = "MM/dd/yy"; //In which you need put here
@@ -230,6 +231,13 @@ public class AssessmentDetails extends AppCompatActivity {
                 AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);
                 return true;
+            case R.id.assessmentdelete:
+                for (Assessment assessment1 : repository.getAllAssessments()) {
+                    if (assessment1.getAssessmentID() == assessmentID) currentAssessment = assessment1;
+                }
+                repository.delete(currentAssessment);
+                this.finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -184,7 +184,8 @@ public class TermDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.allterms:
-                this.finish();
+                Intent intentHome=new Intent(TermDetails.this,TermList.class);
+                startActivity(intentHome);
                 return true;
             case R.id.termsave:
                 Term term;

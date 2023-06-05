@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.c196carolreid.Database.Repository;
 import com.example.c196carolreid.Entities.Assessment;
@@ -54,6 +56,9 @@ public class CourseDetails extends AppCompatActivity {
     EditText editNote;
     EditText editStart;
     Repository repository;
+    Course currentCourse;
+    int numAssessments;
+    Assessment currentAssessment;
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar myCalendarStart = Calendar.getInstance();
@@ -224,12 +229,10 @@ public class CourseDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
+            case R.id.allterms:
+               Intent intentHome=new Intent(CourseDetails.this,TermList.class);
+                startActivity(intentHome);
                 return true;
-//                Intent intent=new Intent(PartDetails.this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
 
             case R.id.coursesave:
                 Course course;
@@ -249,7 +252,8 @@ public class CourseDetails extends AppCompatActivity {
                             editCIEmail.getText().toString(), editNote.getText().toString(), termID);
                     repository.update(course);
                 }
-                return true;
+                this.finish();
+                break;
             case R.id.share:
                 Intent sendIntent=new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -293,6 +297,27 @@ public class CourseDetails extends AppCompatActivity {
                 AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);
                 return true;
+            case R.id.coursedelete:
+                for (Course course1 : repository.getAllCourses()) {
+                    if (course1.getCourseID() == courseID) currentCourse = course1;
+                }
+
+                numAssessments = 0;
+                for (Assessment assessment : repository.getAllAssessments()) {
+                    if (assessment.getCourseID() == courseID) {
+                        currentAssessment = assessment;
+                        repository.delete(currentAssessment);
+                    }
+                }
+
+                repository.delete(currentCourse);
+                Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " was deleted and it's associated assessments", Toast.LENGTH_LONG).show();
+
+                this.finish();
+                break;
+            case R.id.addNewAssessment:
+                Intent intent4=new Intent(CourseDetails.this, AssessmentDetails.class);
+                startActivity(intent4);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -312,5 +337,20 @@ public class CourseDetails extends AppCompatActivity {
         assessmentAdapter.setAssessments(filteredAssessments);
 
         //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
+        RecyclerView recyclerView = findViewById(R.id.assessmentrecyclerview);
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(assessmentAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Assessment> filteredAssessments = new ArrayList<>();
+        for (Assessment a : repository.getAllAssessments()) {
+            if (a.getCourseID() == courseID) filteredAssessments.add(a);
+        }
+        assessmentAdapter.setAssessments(filteredAssessments);
     }
 }

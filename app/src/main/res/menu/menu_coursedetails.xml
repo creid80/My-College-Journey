@@ -15,4 +15,8 @@
         </menu>
     </item>
 
+    <item android:title="@string/delete_course" android:id="@+id/coursedelete"/>
+
+    <item android:title="@string/add_new_assessment" android:id="@+id/addNewAssessment"/>
+
 </menu>
