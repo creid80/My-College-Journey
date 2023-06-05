@@ -2,10 +2,17 @@
 
     <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:title="All Terms" android:id="@+id/allterms"/>
+
     <item android:title="@string/save_course" android:id="@+id/coursesave"/>
 
     <item android:title="@string/share_note" android:id="@+id/share" android:orderInCategory="100"/>
 
-    <item android:title="@string/notify" android:id="@+id/notify" android:orderInCategory="100"/>
+    <item android:title="@string/notify" android:id="@+id/notify" android:orderInCategory="100">
+        <menu>
+            <item android:title="@string/start" android:id="@+id/subitemstart"/>
+            <item android:title="@string/end" android:id="@+id/subitemend"/>
+        </menu>
+    </item>
 
 </menu>

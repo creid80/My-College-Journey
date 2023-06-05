@@ -196,7 +196,7 @@ public class AssessmentDetails extends AppCompatActivity {
                     repository.update(assessment);
                 }
                 return true;
-            case R.id.notify:
+            case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
                 String myFormat = "MM/dd/yy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -208,10 +208,27 @@ public class AssessmentDetails extends AppCompatActivity {
                 }
                 Long trigger=myDate.getTime();
                 Intent intent= new Intent(AssessmentDetails.this,MyReceiver.class);
-                intent.putExtra("key" ,dateFromScreen + " should trigger.");
+                intent.putExtra("key" ,dateFromScreen + "- A notification for the assessment start date has been set.");
                 PendingIntent sender=PendingIntent.getBroadcast(AssessmentDetails.this, ++MainActivity.numAlert,intent,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+            case R.id.subitemend:
+                String dateFromScreen2= editEnd.getText().toString();
+                String myFormat2 = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+                Date myDate2=null;
+                try {
+                    myDate2=sdf2.parse(dateFromScreen2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger2=myDate2.getTime();
+                Intent intent2= new Intent(AssessmentDetails.this,MyReceiver.class);
+                intent2.putExtra("key" ,dateFromScreen2 + "- A notification for the assessment end date has been set.");
+                PendingIntent sender2=PendingIntent.getBroadcast(AssessmentDetails.this, ++MainActivity.numAlert,intent2,PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);
                 return true;
         }
         return super.onOptionsItemSelected(item);

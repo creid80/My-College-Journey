@@ -2,7 +2,7 @@
     <string name="app_name">My College Journey</string>
     <string name="save_course">Save Course</string>
     <string name="share_note">Share Note</string>
-    <string name="notify">Notify</string>
+    <string name="notify">Set Notification</string>
     <string name="save_term">Save Term</string>
     <string name="delete_term">Delete Term</string>
     <string name="add_new_course">Add New Course</string>
@@ -11,4 +11,6 @@
     <string name="channel_description">Notifications for My College Journey App</string>
     <string name="enter">Enter</string>
     <string name="save_assessment">Save Assessment</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
 </resources>
