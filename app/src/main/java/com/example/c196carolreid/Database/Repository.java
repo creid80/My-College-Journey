@@ -1,6 +1,7 @@
 package com.example.c196carolreid.Database;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.example.c196carolreid.DAO.AssessmentDAO;
 import com.example.c196carolreid.DAO.CourseDAO;
@@ -8,6 +9,7 @@ import com.example.c196carolreid.DAO.TermDAO;
 import com.example.c196carolreid.Entities.Assessment;
 import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.Entities.Term;
+import com.example.c196carolreid.UI.TermDetails;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

@@ -313,7 +313,7 @@ public class CourseDetails extends AppCompatActivity {
                 repository.delete(currentCourse);
                 Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " was deleted and it's associated assessments", Toast.LENGTH_LONG).show();
 
-                this.finish();
+                CourseDetails.this.finish();
                 break;
             case R.id.addNewAssessment:
                 Intent intent4=new Intent(CourseDetails.this, AssessmentDetails.class);
@@ -339,18 +339,4 @@ public class CourseDetails extends AppCompatActivity {
         //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    protected void onRestart() {
-
-        super.onRestart();
-        RecyclerView recyclerView = findViewById(R.id.assessmentrecyclerview);
-        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
-        recyclerView.setAdapter(assessmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Assessment> filteredAssessments = new ArrayList<>();
-        for (Assessment a : repository.getAllAssessments()) {
-            if (a.getCourseID() == courseID) filteredAssessments.add(a);
-        }
-        assessmentAdapter.setAssessments(filteredAssessments);
-    }
 }

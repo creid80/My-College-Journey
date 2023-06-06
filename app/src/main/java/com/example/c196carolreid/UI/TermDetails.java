@@ -43,10 +43,12 @@ public class TermDetails extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
+    Bundle savedInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        savedInstance = savedInstanceState;
         setContentView(R.layout.activity_term_details);
         name = getIntent().getStringExtra("name");
         editName = findViewById(R.id.termname);
@@ -182,12 +184,34 @@ public class TermDetails extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.allterms:
-                Intent intentHome=new Intent(TermDetails.this,TermList.class);
+                Intent intentHome = new Intent(TermDetails.this, TermList.class);
                 startActivity(intentHome);
                 return true;
             case R.id.termsave:
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                try {
+                    Date sDate = sdf.parse(editStart.getText().toString());
+                    System.out.println("in menu after start parse");
+                    Date eDate = sdf.parse(editEnd.getText().toString());
+                    if (sDate.toInstant().isAfter(eDate.toInstant())) {
+                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
+                        Toast.makeText(this, "The end date is earlier then the start date. Please enter valid dates and try again.", Toast.LENGTH_LONG).show();
+                        System.out.println("after toast");
+                        this.finish();
+                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
+                        //startActivity(intentHome2);
+                        return false;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
                 Term term;
                 if (termID == -1) {
                     if (repository.getAllTerms().size() == 0) termID = 1;
@@ -199,6 +223,7 @@ public class TermDetails extends AppCompatActivity {
                     term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.update(term);
                 }
+
                 return true;
             case R.id.termdelete:
                 for (Term term1 : repository.getAllTerms()) {
@@ -216,38 +241,21 @@ public class TermDetails extends AppCompatActivity {
                 } else {
                     Toast.makeText(TermDetails.this, "Can't delete a term with courses", Toast.LENGTH_LONG).show();
                 }
+                Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
+                startActivity(intentHome2);
+                this.finish();
                 return true;
             case R.id.addNewCourse:
-                Intent intent2=new Intent(TermDetails.this, CourseDetails.class);
-                startActivity(intent2);
-               /* if (termID == -1)
-                    Toast.makeText(TermDetails.this, "Please save term before adding courses", Toast.LENGTH_LONG).show();
-
+               if (termID == -1) {
+                   Toast.makeText(TermDetails.this, "Please save term before adding courses", Toast.LENGTH_LONG).show();
+                   System.out.println("in addNewCourse need to save term.");
+               }
                 else {
-                    int courseID;
-
-                    if (repository.getAllCourses().size() == 0) courseID = 1;
-                    else
-                        courseID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                    Course course = new Course(courseID, "English", "11/11/11", "12/12/12", "In Progress", "Howard", "879-898-9474",
-                                               "j@hotmail.com", "Note", termID);
-                    repository.insert(course);
-                    course = new Course(++courseID, "Science","11/11/11", "12/12/12", "In Progress", "Howard", "879-898-9474",
-                            "j@hotmail.com", "Note", termID);
-                    repository.insert(course);
-                    RecyclerView recyclerView = findViewById(R.id.courserecyclerview);
-                    final CourseAdapter courseAdapter = new CourseAdapter(this);
-                    recyclerView.setAdapter(courseAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    List<Course> filteredCourses = new ArrayList<>();
-                    for (Course p : repository.getAllCourses()) {
-                        if (p.getTermID() == termID) filteredCourses.add(p);
-                    }
-                    courseAdapter.setCourses(filteredCourses);
-                    return true;
-                }
-
-                */
+                   Intent intent2=new Intent(TermDetails.this, CourseDetails.class);
+                   startActivity(intent2);
+                   return true;
+               }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -257,17 +265,18 @@ public class TermDetails extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
-        RecyclerView recyclerView = findViewById(R.id.courserecyclerview);
-        final CourseAdapter courseAdapter = new CourseAdapter(this);
-        recyclerView.setAdapter(courseAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Course> filteredCourses = new ArrayList<>();
-        for (Course p : repository.getAllCourses()) {
-            if (p.getTermID() == termID) filteredCourses.add(p);
-        }
-        courseAdapter.setCourses(filteredCourses);
+            RecyclerView recyclerView = findViewById(R.id.courserecyclerview);
+            final CourseAdapter courseAdapter = new CourseAdapter(this);
+            recyclerView.setAdapter(courseAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            List<Course> filteredCourses = new ArrayList<>();
+            for (Course p : repository.getAllCourses()) {
+                if (p.getTermID() == termID) filteredCourses.add(p);
+            }
+            courseAdapter.setCourses(filteredCourses);
 
-        //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
+            //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
+
     }
 
 }
