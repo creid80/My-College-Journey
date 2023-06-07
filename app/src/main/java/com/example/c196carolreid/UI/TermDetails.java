@@ -118,6 +118,15 @@ public class TermDetails extends AppCompatActivity {
 
         };
 
+        editEnd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    //Toast.makeText(TermDetails.this, "unfocus", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         editEnd.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -126,7 +135,7 @@ public class TermDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info=editEnd.getText().toString();
-                if(info.equals(""))info="02/10/22";
+                if(info.equals(""))info= String.valueOf(Locale.getDefault());
                 try{
                     myCalendarStart.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -199,12 +208,12 @@ public class TermDetails extends AppCompatActivity {
                     Date eDate = sdf.parse(editEnd.getText().toString());
                     if (sDate.toInstant().isAfter(eDate.toInstant())) {
                         System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
-                        Toast.makeText(this, "The end date is earlier then the start date. Please enter valid dates and try again.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "The end date must be later then the start date.", Toast.LENGTH_LONG).show();
                         System.out.println("after toast");
-                        this.finish();
+
                         //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
                         //startActivity(intentHome2);
-                        return false;
+                        return true;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -224,7 +233,9 @@ public class TermDetails extends AppCompatActivity {
                     repository.update(term);
                 }
 
-                return true;
+                Toast.makeText(this, editName.getText().toString() + " was saved", Toast.LENGTH_LONG).show();
+                this.finish();
+                return false;
             case R.id.termdelete:
                 for (Term term1 : repository.getAllTerms()) {
                     if (term1.getTermID() == termID) currentTerm = term1;
@@ -239,15 +250,15 @@ public class TermDetails extends AppCompatActivity {
                     repository.delete(currentTerm);
                     Toast.makeText(TermDetails.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(TermDetails.this, "Can't delete a term with courses", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TermDetails.this, "Delete associated courses and try again", Toast.LENGTH_LONG).show();
                 }
-                Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
-                startActivity(intentHome2);
+                //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
+                //startActivity(intentHome2);
                 this.finish();
-                return true;
+                break;
             case R.id.addNewCourse:
                if (termID == -1) {
-                   Toast.makeText(TermDetails.this, "Please save term before adding courses", Toast.LENGTH_LONG).show();
+                   Toast.makeText(TermDetails.this, "Save term before adding courses", Toast.LENGTH_LONG).show();
                    System.out.println("in addNewCourse need to save term.");
                }
                 else {
