@@ -12,38 +12,26 @@ public class Term {
     private String termEnd;
 
     public Term(int TermID, String termName, String termStart, String termEnd) {
+
         this.TermID = TermID;
         this.termName = termName;
         this.termStart = termStart;
         this.termEnd = termEnd;
     }
 
-    public Term() {
-    }
+    public Term() {}
 
-    public int getTermID() {
-        return TermID;
-    }
+    public int getTermID() { return TermID; }
 
-    public void setTermID(int termID) {
-        this.TermID = termID;
-    }
+    public void setTermID(int termID) { this.TermID = termID; }
 
-    public String getTermName() {
-        return termName;
-    }
+    public String getTermName() { return termName; }
 
-    public void setTermName(String termName) {
-        this.termName = termName;
-    }
+    public void setTermName(String termName) { this.termName = termName; }
 
-    public String getTermStart() {
-        return termStart;
-    }
+    public String getTermStart() { return termStart; }
 
-    public void setTermStart(String termStart) {
-        this.termStart = termStart;
-    }
+    public void setTermStart(String termStart) { this.termStart = termStart; }
 
     public String getTermEnd() { return termEnd; }
 

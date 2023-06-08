@@ -20,6 +20,7 @@ public class Course {
 
     public Course(int courseID, String courseName, String courseStart, String courseEnd, String status, String CIName,
                   String CIPhone, String CIEmail, String note, int TermID) {
+
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseStart = courseStart;
@@ -34,21 +35,13 @@ public class Course {
 
     public Course() {}
 
-    public int getCourseID() {
-        return courseID;
-    }
+    public int getCourseID() { return courseID; }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
+    public void setCourseID(int courseID) { this.courseID = courseID; }
 
-    public String getCourseName() {
-        return courseName;
-    }
+    public String getCourseName() { return courseName; }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+    public void setCourseName(String courseName) { this.courseName = courseName; }
 
     public String getCourseStart() { return courseStart; }
 

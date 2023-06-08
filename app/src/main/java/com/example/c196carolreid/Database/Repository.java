@@ -1,7 +1,6 @@
 package com.example.c196carolreid.Database;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import com.example.c196carolreid.DAO.AssessmentDAO;
 import com.example.c196carolreid.DAO.CourseDAO;
@@ -9,7 +8,6 @@ import com.example.c196carolreid.DAO.TermDAO;
 import com.example.c196carolreid.Entities.Assessment;
 import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.Entities.Term;
-import com.example.c196carolreid.UI.TermDetails;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -32,6 +30,7 @@ public class Repository {
         mCourseDAO =db.courseDAO();
         mTermDAO =db.termDAO();
     }
+
     public List<Term> getAllTerms(){
         databaseExecutor.execute(()->{
             mAllTerms = mTermDAO.getAllTerms();
@@ -44,6 +43,7 @@ public class Repository {
         }
         return mAllTerms;
     }
+
     public void insert(Term term){
         databaseExecutor.execute(()->{
             mTermDAO.insert(term);
@@ -54,6 +54,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void update(Term term){
         databaseExecutor.execute(()->{
             mTermDAO.update(term);
@@ -64,6 +65,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void delete(Term term){
         databaseExecutor.execute(()->{
             mTermDAO.delete(term);
@@ -74,6 +76,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public List<Course> getAllCourses(){
         databaseExecutor.execute(()->{
             mAllCourses = mCourseDAO.getAllCourses();
@@ -86,6 +89,7 @@ public class Repository {
         }
         return mAllCourses;
     }
+
     public void insert(Course course){
         databaseExecutor.execute(()->{
             mCourseDAO.insert(course);
@@ -96,6 +100,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void update(Course course){
         databaseExecutor.execute(()->{
             mCourseDAO.update(course);
@@ -106,6 +111,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void delete(Course course){
         databaseExecutor.execute(()->{
             mCourseDAO.delete(course);
@@ -116,6 +122,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public List<Assessment> getAllAssessments(){
         databaseExecutor.execute(()->{
             mAllAssessments = mAssessmentDAO.getAllAssessments();
@@ -128,6 +135,7 @@ public class Repository {
         }
         return mAllAssessments;
     }
+
     public void insert(Assessment assessment){
         databaseExecutor.execute(()->{
             mAssessmentDAO.insert(assessment);
@@ -138,6 +146,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void update(Assessment assessment){
         databaseExecutor.execute(()->{
             mAssessmentDAO.update(assessment);
@@ -148,6 +157,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public void delete(Assessment assessment){
         databaseExecutor.execute(()->{
             mAssessmentDAO.delete(assessment);

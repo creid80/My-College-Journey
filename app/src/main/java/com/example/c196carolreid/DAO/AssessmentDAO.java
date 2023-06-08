@@ -8,7 +8,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.c196carolreid.Entities.Assessment;
-import com.example.c196carolreid.Entities.Course;
 
 import java.util.List;
 

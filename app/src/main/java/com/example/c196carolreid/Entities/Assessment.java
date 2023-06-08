@@ -14,8 +14,8 @@ public class Assessment {
     private String assessmentType;
     private int courseID;
 
-    public Assessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, String assessmentType,
-                      int courseID) {
+    public Assessment(int assessmentID, String assessmentName, String assessmentStart,
+                      String assessmentEnd, String assessmentType, int courseID) {
 
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
@@ -27,51 +27,27 @@ public class Assessment {
 
     public Assessment() {}
 
-    public int getAssessmentID() {
-        return assessmentID;
-    }
+    public int getAssessmentID() { return assessmentID; }
 
-    public void setAssessmentID(int assessmentID) {
-        this.assessmentID = assessmentID;
-    }
+    public void setAssessmentID(int assessmentID) { this.assessmentID = assessmentID; }
 
-    public String getAssessmentName() {
-        return assessmentName;
-    }
+    public String getAssessmentName() { return assessmentName; }
 
-    public void setAssessmentName(String assessmentName) {
-        this.assessmentName = assessmentName;
-    }
+    public void setAssessmentName(String assessmentName) { this.assessmentName = assessmentName; }
 
-    public String getAssessmentStart() {
-        return assessmentStart;
-    }
+    public String getAssessmentStart() { return assessmentStart; }
 
-    public void setAssessmentStart(String assessmentStart) {
-        this.assessmentStart = assessmentStart;
-    }
+    public void setAssessmentStart(String assessmentStart) { this.assessmentStart = assessmentStart; }
 
-    public String getAssessmentEnd() {
-        return assessmentEnd;
-    }
+    public String getAssessmentEnd() { return assessmentEnd; }
 
-    public void setAssessmentEnd(String assessmentEnd) {
-        this.assessmentEnd = assessmentEnd;
-    }
+    public void setAssessmentEnd(String assessmentEnd) { this.assessmentEnd = assessmentEnd; }
 
-    public String getAssessmentType() {
-        return assessmentType;
-    }
+    public String getAssessmentType() { return assessmentType; }
 
-    public void setAssessmentType(String assessmentType) {
-        this.assessmentType = assessmentType;
-    }
+    public void setAssessmentType(String assessmentType) { this.assessmentType = assessmentType; }
 
-    public int getCourseID() {
-        return courseID;
-    }
+    public int getCourseID() { return courseID; }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
+    public void setCourseID(int courseID) { this.courseID = courseID; }
 }
