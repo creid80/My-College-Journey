@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -105,7 +106,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info= editStart.getText().toString();
-                if(info.equals(""))info="11/12/84";
+                if(info.equals(""))info="01/02/03";
                 try{
                     myCalendarStart.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -141,7 +142,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info= editEnd.getText().toString();
-                if(info.equals(""))info="11/12/84";
+                if(info.equals(""))info="02/03/04";
                 try{
                     myCalendarEnd.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -179,11 +180,29 @@ public class AssessmentDetails extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.allterms:
-                Intent intentHome=new Intent(AssessmentDetails.this,TermList.class);
+                Intent intentHome = new Intent(AssessmentDetails.this,TermList.class);
                 startActivity(intentHome);
                 return true;
-
             case R.id.assessmentsave:
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                try {
+                    Date sDate = sdf.parse(editStart.getText().toString());
+                    System.out.println("in menu after start parse");
+                    Date eDate = sdf.parse(editEnd.getText().toString());
+                    if (sDate.toInstant().isAfter(eDate.toInstant())) {
+                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
+                        Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
+                        System.out.println("after toast");
+
+                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
+                        //startActivity(intentHome2);
+                        return true;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 Assessment assessment;
                 if (assessmentID == -1) {
                     if (repository.getAllAssessments().size() == 0)
@@ -198,15 +217,16 @@ public class AssessmentDetails extends AppCompatActivity {
                             spinner.getSelectedItem().toString(), courseID);
                     repository.update(assessment);
                 }
+                Toast.makeText(this, editName.getText().toString() + " was saved", Toast.LENGTH_LONG).show();
                 this.finish();
-                break;
+                return false;
             case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
-                String myFormat = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String myFormat2 = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
                 Date myDate=null;
                 try {
-                    myDate=sdf.parse(dateFromScreen);
+                    myDate=sdf2.parse(dateFromScreen);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -219,11 +239,11 @@ public class AssessmentDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemend:
                 String dateFromScreen2= editEnd.getText().toString();
-                String myFormat2 = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+                String myFormat3 = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat3, Locale.US);
                 Date myDate2=null;
                 try {
-                    myDate2=sdf2.parse(dateFromScreen2);
+                    myDate2=sdf3.parse(dateFromScreen2);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -239,6 +259,7 @@ public class AssessmentDetails extends AppCompatActivity {
                     if (assessment1.getAssessmentID() == assessmentID) currentAssessment = assessment1;
                 }
                 repository.delete(currentAssessment);
+                Toast.makeText(AssessmentDetails.this, currentAssessment.getAssessmentName() + " was deleted", Toast.LENGTH_LONG).show();
                 this.finish();
                 break;
         }

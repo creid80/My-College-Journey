@@ -338,7 +338,7 @@ public class CourseDetails extends AppCompatActivity {
                 repository.delete(currentCourse);
                 Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " and it's associated assessments were deleted", Toast.LENGTH_LONG).show();
 
-                finish();
+                this.finish();
                 break;
             case R.id.addNewAssessment:
                 if(courseID == -1) {
