@@ -300,7 +300,7 @@ public class CourseDetails extends AppCompatActivity {
                 }
                 Long trigger=myDate.getTime();
                 Intent intent= new Intent(CourseDetails.this,MyReceiver.class);
-                intent.putExtra("key" ,dateFromScreen + "- A notification for the course start date has been set.");
+                intent.putExtra("key" ,dateFromScreen + "- The " + name + " course starts today.");
                 PendingIntent sender=PendingIntent.getBroadcast(CourseDetails.this, ++MainActivity.numAlert,intent,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
@@ -317,7 +317,7 @@ public class CourseDetails extends AppCompatActivity {
                 }
                 Long trigger2=myDate2.getTime();
                 Intent intent2= new Intent(CourseDetails.this,MyReceiver.class);
-                intent2.putExtra("key" ,dateFromScreen2 + "- A notification for the course end date has been set.");
+                intent2.putExtra("key" ,dateFromScreen2 + "- The " + name + " course starts today.");
                 PendingIntent sender2=PendingIntent.getBroadcast(CourseDetails.this, ++MainActivity.numAlert,intent2,PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager2.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);

@@ -5,7 +5,7 @@
 
     <item android:title="@string/save_assessment" android:id="@+id/assessmentsave"/>
 
-    <item android:title="@string/notify" android:id="@+id/notify" android:orderInCategory="100">
+    <item android:title="@string/notify" android:id="@+id/notify">
         <menu>
             <item android:title="@string/start" android:id="@+id/subitemstart"/>
             <item android:title="@string/end" android:id="@+id/subitemend"/>
