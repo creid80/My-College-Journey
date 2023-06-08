@@ -43,12 +43,18 @@ public class TermDetails extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
-    Bundle savedInstance;
+
+    public static Bundle getSavedInstance() {
+        return savedInstance;
+    }
+
+    public static Bundle savedInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        savedInstance = savedInstanceState;
+
+        System.out.println("In on Create");
         setContentView(R.layout.activity_term_details);
         name = getIntent().getStringExtra("name");
         editName = findViewById(R.id.termname);
@@ -84,7 +90,7 @@ public class TermDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info=editStart.getText().toString();
-                if(info.equals(""))info="02/10/22";
+                if(info.equals(""))info="01/02/03";
                 try{
                     myCalendarStart.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -118,7 +124,7 @@ public class TermDetails extends AppCompatActivity {
 
         };
 
-        editEnd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*editEnd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -126,6 +132,8 @@ public class TermDetails extends AppCompatActivity {
                 }
             }
         });
+
+         */
 
         editEnd.setOnClickListener(new View.OnClickListener() {
 
@@ -135,7 +143,7 @@ public class TermDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info=editEnd.getText().toString();
-                if(info.equals(""))info= String.valueOf(Locale.getDefault());
+                if(info.equals(""))info="02/03/04";
                 try{
                     myCalendarStart.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -195,6 +203,9 @@ public class TermDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
             case R.id.allterms:
                 Intent intentHome = new Intent(TermDetails.this, TermList.class);
                 startActivity(intentHome);
@@ -208,7 +219,7 @@ public class TermDetails extends AppCompatActivity {
                     Date eDate = sdf.parse(editEnd.getText().toString());
                     if (sDate.toInstant().isAfter(eDate.toInstant())) {
                         System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
-                        Toast.makeText(this, "The end date must be later then the start date.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
                         System.out.println("after toast");
 
                         //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
@@ -289,5 +300,4 @@ public class TermDetails extends AppCompatActivity {
             //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
 
     }
-
 }

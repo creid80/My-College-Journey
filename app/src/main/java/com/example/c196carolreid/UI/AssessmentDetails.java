@@ -175,6 +175,9 @@ public class AssessmentDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
             case R.id.allterms:
                 Intent intentHome=new Intent(AssessmentDetails.this,TermList.class);
                 startActivity(intentHome);

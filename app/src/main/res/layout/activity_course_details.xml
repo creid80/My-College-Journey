@@ -76,7 +76,7 @@
                 android:id="@+id/courseStart"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:hint="11/12/84"
+                android:hint="01/02/03"
                 android:inputType="none" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -97,7 +97,7 @@
                 android:id="@+id/courseEnd"
                 android:layout_width="110dp"
                 android:layout_height="match_parent"
-                android:hint="11/12/84"
+                android:hint="02/03/04"
                 android:inputType="none" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 

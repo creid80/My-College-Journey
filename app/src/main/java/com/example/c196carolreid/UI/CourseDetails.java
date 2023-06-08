@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +65,7 @@ public class CourseDetails extends AppCompatActivity {
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
     Spinner spinner;
+    Bundle prevInstanceState = TermDetails.getSavedInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,7 @@ public class CourseDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info= editStart.getText().toString();
-                if(info.equals(""))info="11/12/84";
+                if(info.equals(""))info="01/02/03";
                 try{
                     myCalendarStart.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -171,7 +173,7 @@ public class CourseDetails extends AppCompatActivity {
                 Date date;
                 //get value from other screen,but I'm going to hard code it right now
                 String info= editEnd.getText().toString();
-                if(info.equals(""))info="11/12/84";
+                if(info.equals(""))info="02/03/04";
                 try{
                     myCalendarEnd.setTime(sdf.parse(info));
                 } catch (ParseException e) {
@@ -229,12 +231,34 @@ public class CourseDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
             case R.id.allterms:
-               Intent intentHome=new Intent(CourseDetails.this,TermList.class);
+               Intent intentHome = new Intent(CourseDetails.this,TermList.class);
                 startActivity(intentHome);
                 return true;
-
             case R.id.coursesave:
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                try {
+                    Date sDate = sdf.parse(editStart.getText().toString());
+                    System.out.println("in menu after start parse");
+                    Date eDate = sdf.parse(editEnd.getText().toString());
+                    if (sDate.toInstant().isAfter(eDate.toInstant())) {
+                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
+                        Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
+                        System.out.println("after toast");
+
+                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
+                        //startActivity(intentHome2);
+                        return true;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
                 Course course;
                 if (courseID == -1) {
                     if (repository.getAllCourses().size() == 0)
@@ -252,8 +276,9 @@ public class CourseDetails extends AppCompatActivity {
                             editCIEmail.getText().toString(), editNote.getText().toString(), termID);
                     repository.update(course);
                 }
+                Toast.makeText(this, editName.getText().toString() + " was saved", Toast.LENGTH_LONG).show();
                 this.finish();
-                break;
+                return false;
             case R.id.share:
                 Intent sendIntent=new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -265,11 +290,11 @@ public class CourseDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
-                String myFormat = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String myFormat2 = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
                 Date myDate=null;
                 try {
-                    myDate=sdf.parse(dateFromScreen);
+                    myDate=sdf2.parse(dateFromScreen);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -282,11 +307,11 @@ public class CourseDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemend:
                 String dateFromScreen2= editEnd.getText().toString();
-                String myFormat2 = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+                String myFormat3 = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat3, Locale.US);
                 Date myDate2=null;
                 try {
-                    myDate2=sdf2.parse(dateFromScreen2);
+                    myDate2=sdf3.parse(dateFromScreen2);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -311,13 +336,20 @@ public class CourseDetails extends AppCompatActivity {
                 }
 
                 repository.delete(currentCourse);
-                Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " was deleted and it's associated assessments", Toast.LENGTH_LONG).show();
+                Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " and it's associated assessments were deleted", Toast.LENGTH_LONG).show();
 
-                CourseDetails.this.finish();
+                finish();
                 break;
             case R.id.addNewAssessment:
-                Intent intent4=new Intent(CourseDetails.this, AssessmentDetails.class);
-                startActivity(intent4);
+                if(courseID == -1) {
+                    Toast.makeText(CourseDetails.this, "Save course before adding assessment", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent4 = new Intent(CourseDetails.this, AssessmentDetails.class);
+                    startActivity(intent4);
+                    return true;
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -339,4 +371,12 @@ public class CourseDetails extends AppCompatActivity {
         //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
     }
 
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+
+    }
+
+     */
 }

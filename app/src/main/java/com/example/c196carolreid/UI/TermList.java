@@ -46,30 +46,10 @@ public class TermList extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()) {
-            /*case android.R.id.home:
-                this.finish();
-                Intent intent=new Intent(TermList.this, MainActivity.class);
-                startActivity(intent);
-                return true;
-
-             */
 
             case R.id.addNewTerm:
                 Intent intent2=new Intent(TermList.this, TermDetails.class);
                 startActivity(intent2);
-                /*Repository repo = new Repository(getApplication());
-                Term term = new Term(1, "Term 1", "11/12/84", "12/12/84");
-                repo.insert(term);
-                term = new Term(2, "Term 2", "10/15/84", "11/15/84");
-                repo.insert(term);
-                List<Term> allTerms=repository.getAllTerms();
-                RecyclerView recyclerView=findViewById(R.id.recyclerview);
-                final TermAdapter termAdapter =new TermAdapter(this);
-                recyclerView.setAdapter(termAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                termAdapter.setTerms(allTerms);
-
-                 */
 
                 return true;
         }
