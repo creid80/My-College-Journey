@@ -17,7 +17,6 @@ import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
-
     class CourseViewHolder extends RecyclerView.ViewHolder{
         private final TextView courseItemView;
         private final TextView courseItemView2;
@@ -46,6 +45,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             });
         }
     }
+
     private List<Course> mCourses;
     private final Context context;
     private final LayoutInflater mInflater;
@@ -83,7 +83,5 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     @Override
-    public int getItemCount() {
-        return mCourses.size();
-    }
+    public int getItemCount() { return mCourses.size(); }
 }

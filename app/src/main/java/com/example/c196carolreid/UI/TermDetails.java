@@ -20,6 +20,7 @@ import com.example.c196carolreid.Entities.Term;
 import com.example.c196carolreid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,12 +45,6 @@ public class TermDetails extends AppCompatActivity {
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
 
-    public static Bundle getSavedInstance() {
-        return savedInstance;
-    }
-
-    public static Bundle savedInstance;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +65,10 @@ public class TermDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
 
                 myCalendarStart.set(Calendar.YEAR, year);
                 myCalendarStart.set(Calendar.MONTH, monthOfYear);
                 myCalendarStart.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
 
                 updateLabelStart();
             }
@@ -86,9 +79,7 @@ public class TermDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
+
                 String info=editStart.getText().toString();
                 if(info.equals(""))info="01/02/03";
                 try{
@@ -112,7 +103,6 @@ public class TermDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
 
                 myCalendarEnd.set(Calendar.YEAR, year);
                 myCalendarEnd.set(Calendar.MONTH, monthOfYear);
@@ -124,24 +114,11 @@ public class TermDetails extends AppCompatActivity {
 
         };
 
-        /*editEnd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    //Toast.makeText(TermDetails.this, "unfocus", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-         */
-
         editEnd.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
+
                 String info=editEnd.getText().toString();
                 if(info.equals(""))info="02/03/04";
                 try{
@@ -154,7 +131,6 @@ public class TermDetails extends AppCompatActivity {
                         myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
 
 
         termID = getIntent().getIntExtra("id", -1);
@@ -172,6 +148,7 @@ public class TermDetails extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TermDetails.this, CourseDetails.class);
@@ -182,14 +159,14 @@ public class TermDetails extends AppCompatActivity {
     }
 
     private void updateLabelStart() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editStart.setText(sdf.format(myCalendarStart.getTime()));
     }
 
     private void updateLabelEnd() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editEnd.setText(sdf.format(myCalendarEnd.getTime()));
@@ -211,25 +188,22 @@ public class TermDetails extends AppCompatActivity {
                 startActivity(intentHome);
                 return true;
             case R.id.termsave:
+
+                if(editStart.getText().toString().matches("")) editStart.setText("01/02/03");
+                if(editEnd.getText().toString().matches("")) editEnd.setText("02/03/04");
+
                 String myFormat = "MM/dd/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
                 try {
                     Date sDate = sdf.parse(editStart.getText().toString());
-                    System.out.println("in menu after start parse");
                     Date eDate = sdf.parse(editEnd.getText().toString());
                     if (sDate.toInstant().isAfter(eDate.toInstant())) {
-                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
-                        Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
-                        System.out.println("after toast");
-
-                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
-                        //startActivity(intentHome2);
+                            Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
                         return true;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
 
 
                 Term term;
@@ -263,14 +237,12 @@ public class TermDetails extends AppCompatActivity {
                 } else {
                     Toast.makeText(TermDetails.this, "Delete associated courses and try again", Toast.LENGTH_LONG).show();
                 }
-                //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
-                //startActivity(intentHome2);
+
                 this.finish();
                 break;
             case R.id.addNewCourse:
                if (termID == -1) {
                    Toast.makeText(TermDetails.this, "Save term before adding courses", Toast.LENGTH_LONG).show();
-                   System.out.println("in addNewCourse need to save term.");
                }
                 else {
                    Intent intent2=new Intent(TermDetails.this, CourseDetails.class);
@@ -281,7 +253,6 @@ public class TermDetails extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onResume() {
@@ -296,8 +267,5 @@ public class TermDetails extends AppCompatActivity {
                 if (p.getTermID() == termID) filteredCourses.add(p);
             }
             courseAdapter.setCourses(filteredCourses);
-
-            //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
-
     }
 }

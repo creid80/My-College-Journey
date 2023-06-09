@@ -1,15 +1,14 @@
 package com.example.c196carolreid.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.c196carolreid.Database.Repository;
 import com.example.c196carolreid.Entities.Term;
@@ -20,18 +19,21 @@ import java.util.List;
 
 public class TermList extends AppCompatActivity {
     private Repository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
         FloatingActionButton fab=findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(TermList.this, TermDetails.class);
                 startActivity(intent);
             }
         });
+
         repository=new Repository(getApplication());
         List<Term> allTerms=repository.getAllTerms();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
@@ -40,21 +42,23 @@ public class TermList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         termAdapter.setTerms(allTerms);
     }
+
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()) {
 
             case R.id.addNewTerm:
                 Intent intent2=new Intent(TermList.this, TermDetails.class);
                 startActivity(intent2);
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onResume() {
 
@@ -65,7 +69,5 @@ public class TermList extends AppCompatActivity {
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         termAdapter.setTerms(allTerms);
-
-        //Toast.makeText(TermList.this,"refresh list", Toast.LENGTH_LONG).show();
     }
 }

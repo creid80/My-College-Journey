@@ -1,17 +1,11 @@
 package com.example.c196carolreid.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +15,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.c196carolreid.Database.Repository;
 import com.example.c196carolreid.Entities.Assessment;
 import com.example.c196carolreid.Entities.Course;
-import com.example.c196carolreid.Entities.Term;
 import com.example.c196carolreid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -65,7 +62,6 @@ public class CourseDetails extends AppCompatActivity {
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
     Spinner spinner;
-    Bundle prevInstanceState = TermDetails.getSavedInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +93,7 @@ public class CourseDetails extends AppCompatActivity {
         editNote.setText(note);
         termID = getIntent().getIntExtra("termID", -1);
 
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         ArrayList<String> termArrayList= new ArrayList<>();
@@ -118,7 +114,6 @@ public class CourseDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
 
                 myCalendarStart.set(Calendar.YEAR, year);
                 myCalendarStart.set(Calendar.MONTH, monthOfYear);
@@ -133,9 +128,6 @@ public class CourseDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
                 String info= editStart.getText().toString();
                 if(info.equals(""))info="01/02/03";
                 try{
@@ -154,7 +146,6 @@ public class CourseDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
 
                 myCalendarEnd.set(Calendar.YEAR, year);
                 myCalendarEnd.set(Calendar.MONTH, monthOfYear);
@@ -169,9 +160,7 @@ public class CourseDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
+
                 String info= editEnd.getText().toString();
                 if(info.equals(""))info="02/03/04";
                 try{
@@ -207,17 +196,17 @@ public class CourseDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
+
     private void updateLabelStart() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editStart.setText(sdf.format(myCalendarStart.getTime()));
     }
 
     private void updateLabelEnd() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editEnd.setText(sdf.format(myCalendarEnd.getTime()));
@@ -239,25 +228,22 @@ public class CourseDetails extends AppCompatActivity {
                 startActivity(intentHome);
                 return true;
             case R.id.coursesave:
+
+                if(editStart.getText().toString().matches("")) editStart.setText("01/02/03");
+                if(editEnd.getText().toString().matches("")) editEnd.setText("02/03/04");
+
                 String myFormat = "MM/dd/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
                 try {
                     Date sDate = sdf.parse(editStart.getText().toString());
-                    System.out.println("in menu after start parse");
                     Date eDate = sdf.parse(editEnd.getText().toString());
                     if (sDate.toInstant().isAfter(eDate.toInstant())) {
-                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
                         Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
-                        System.out.println("after toast");
-
-                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
-                        //startActivity(intentHome2);
                         return true;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
 
                 Course course;
                 if (courseID == -1) {
@@ -265,7 +251,6 @@ public class CourseDetails extends AppCompatActivity {
                         courseID = 1;
                     else
                         courseID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                        //editStatus = spinner.getSelectedItem();
                     course = new Course(courseID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(),
                                         spinner.getSelectedItem().toString(), editCIName.getText().toString(), editCIPhone.getText().toString(),
                                         editCIEmail.getText().toString(), editNote.getText().toString(), termID);
@@ -290,7 +275,7 @@ public class CourseDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
-                String myFormat2 = "MM/dd/yy"; //In which you need put here
+                String myFormat2 = "MM/dd/yy";
                 SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
                 Date myDate=null;
                 try {
@@ -307,7 +292,7 @@ public class CourseDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemend:
                 String dateFromScreen2= editEnd.getText().toString();
-                String myFormat3 = "MM/dd/yy"; //In which you need put here
+                String myFormat3 = "MM/dd/yy";
                 SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat3, Locale.US);
                 Date myDate2=null;
                 try {
@@ -337,7 +322,6 @@ public class CourseDetails extends AppCompatActivity {
 
                 repository.delete(currentCourse);
                 Toast.makeText(CourseDetails.this, currentCourse.getCourseName() + " and it's associated assessments were deleted", Toast.LENGTH_LONG).show();
-
                 this.finish();
                 break;
             case R.id.addNewAssessment:
@@ -368,15 +352,5 @@ public class CourseDetails extends AppCompatActivity {
         }
         assessmentAdapter.setAssessments(filteredAssessments);
 
-        //Toast.makeText(ProductDetails.this,"refresh list",Toast.LENGTH_LONG).show();
     }
-
-    /*@Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-
-    }
-
-     */
 }

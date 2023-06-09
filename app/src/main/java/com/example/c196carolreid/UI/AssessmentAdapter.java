@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.c196carolreid.Entities.Assessment;
-import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.R;
 
 import java.util.List;
@@ -24,8 +23,8 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         private final TextView assessmentItemView2;
         private AssessmentViewHolder(View itemView){
             super(itemView);
-            assessmentItemView =itemView.findViewById(R.id.textView5);
-            assessmentItemView2 =itemView.findViewById(R.id.textView6);
+            assessmentItemView =itemView.findViewById(R.id.textView);
+            assessmentItemView2 =itemView.findViewById(R.id.textView2);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -43,6 +42,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
             });
         }
     }
+
     private List<Assessment> mAssessments;
     private final Context context;
     private final LayoutInflater mInflater;
@@ -70,7 +70,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         }
         else{
             holder.assessmentItemView.setText("No assessment name");
-            holder.assessmentItemView.setText("No course id");
+            holder.assessmentItemView2.setText("No assessment type");
         }
     }
 
@@ -80,8 +80,6 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
     }
 
     @Override
-    public int getItemCount() {
-        return mAssessments.size();
-    }
+    public int getItemCount() { return mAssessments.size(); }
 }
 

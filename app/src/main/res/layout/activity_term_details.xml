@@ -118,8 +118,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courserecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="464dp"
+        android:layout_height="500dp"
         android:layout_margin="10dp"
+        android:scrollbars="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="201dp"
         app:layout_constraintLeft_toLeftOf="parent"

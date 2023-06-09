@@ -24,6 +24,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
             super(itemView);
             termItemView =itemView.findViewById(R.id.textView);
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     int position=getAdapterPosition();
@@ -38,6 +39,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
             });
         }
     }
+
     private List<Term> mTerms;
     private final Context context;
     private final LayoutInflater mInflater;
@@ -46,6 +48,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         mInflater=LayoutInflater.from(context);
         this.context=context;
     }
+
     @NonNull
     @Override
     public TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,7 +74,5 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     }
 
     @Override
-    public int getItemCount() {
-        return mTerms.size();
-    }
+    public int getItemCount() { return mTerms.size(); }
 }

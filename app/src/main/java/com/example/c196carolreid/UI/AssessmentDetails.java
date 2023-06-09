@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.c196carolreid.Database.Repository;
 import com.example.c196carolreid.Entities.Assessment;
-import com.example.c196carolreid.Entities.Course;
 import com.example.c196carolreid.R;
 
 import java.text.ParseException;
@@ -67,8 +66,7 @@ public class AssessmentDetails extends AppCompatActivity {
         editEnd.setText(end);
         courseID = getIntent().getIntExtra("courseID", -1);
 
-
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         ArrayList<String> courseArrayList= new ArrayList<>();
@@ -87,7 +85,6 @@ public class AssessmentDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
 
                 myCalendarStart.set(Calendar.YEAR, year);
                 myCalendarStart.set(Calendar.MONTH, monthOfYear);
@@ -102,9 +99,6 @@ public class AssessmentDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
                 String info= editStart.getText().toString();
                 if(info.equals(""))info="01/02/03";
                 try{
@@ -121,9 +115,7 @@ public class AssessmentDetails extends AppCompatActivity {
         endDate = new DatePickerDialog.OnDateSetListener() {
 
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                 myCalendarEnd.set(Calendar.YEAR, year);
                 myCalendarEnd.set(Calendar.MONTH, monthOfYear);
@@ -138,9 +130,6 @@ public class AssessmentDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Date date;
-                //get value from other screen,but I'm going to hard code it right now
                 String info= editEnd.getText().toString();
                 if(info.equals(""))info="02/03/04";
                 try{
@@ -156,14 +145,14 @@ public class AssessmentDetails extends AppCompatActivity {
     }
 
     private void updateLabelStart() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editStart.setText(sdf.format(myCalendarStart.getTime()));
     }
 
     private void updateLabelEnd() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editEnd.setText(sdf.format(myCalendarEnd.getTime()));
@@ -184,24 +173,24 @@ public class AssessmentDetails extends AppCompatActivity {
                 startActivity(intentHome);
                 return true;
             case R.id.assessmentsave:
-                String myFormat = "MM/dd/yy";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+
+                if(editStart.getText().toString().matches("")) editStart.setText("01/02/03");
+                if(editEnd.getText().toString().matches("")) editEnd.setText("02/03/04");
+
                 try {
+                    String myFormat = "MM/dd/yy";
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
                     Date sDate = sdf.parse(editStart.getText().toString());
-                    System.out.println("in menu after start parse");
                     Date eDate = sdf.parse(editEnd.getText().toString());
                     if (sDate.toInstant().isAfter(eDate.toInstant())) {
-                        System.out.println("in if statement " + sDate.toString() + " " + eDate.toString());
                         Toast.makeText(this, "The end date must be later than the start date.", Toast.LENGTH_LONG).show();
-                        System.out.println("after toast");
-
-                        //Intent intentHome2 = new Intent(TermDetails.this, TermList.class);
-                        //startActivity(intentHome2);
                         return true;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+                assessmentID = getIntent().getIntExtra("id", -1);
 
                 Assessment assessment;
                 if (assessmentID == -1) {
@@ -222,7 +211,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 return false;
             case R.id.subitemstart:
                 String dateFromScreen= editStart.getText().toString();
-                String myFormat2 = "MM/dd/yy"; //In which you need put here
+                String myFormat2 = "MM/dd/yy";
                 SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
                 Date myDate=null;
                 try {
@@ -239,7 +228,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 return true;
             case R.id.subitemend:
                 String dateFromScreen2= editEnd.getText().toString();
-                String myFormat3 = "MM/dd/yy"; //In which you need put here
+                String myFormat3 = "MM/dd/yy";
                 SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat3, Locale.US);
                 Date myDate2=null;
                 try {
