@@ -245,6 +245,7 @@ public class TermDetails extends AppCompatActivity {
                }
                 else {
                    Intent intent2=new Intent(TermDetails.this, CourseDetails.class);
+                   intent2.putExtra("termID", termID);
                    startActivity(intent2);
                    return true;
                }

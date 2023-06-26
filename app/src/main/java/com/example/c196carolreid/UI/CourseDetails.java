@@ -330,6 +330,7 @@ public class CourseDetails extends AppCompatActivity {
                 }
                 else {
                     Intent intent4 = new Intent(CourseDetails.this, AssessmentDetails.class);
+                    intent4.putExtra("courseID", courseID);
                     startActivity(intent4);
                     return true;
                 }
